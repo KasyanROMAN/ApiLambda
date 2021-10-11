@@ -1,6 +1,6 @@
 const {Router} = require('express');
 const router = Router();
 
-const multypalay = require('../controllers/multyplay.controller');
-router.post('/multyplay',multypalay.result);
+const makeCalculations = require('../controllers/makeCalculations.controller');
+router.post('/makeCalculations',makeCalculations.result);
 module.exports = router;
