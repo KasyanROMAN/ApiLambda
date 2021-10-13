@@ -1,5 +1,4 @@
 const { request } = require("express");
-const { lang } = require("moment");
 var moment = require('moment');
 
 const makeCalculations = function(){};
@@ -8,13 +7,9 @@ const weekend = function(){};
 const results = function(){};
 const extension = function(){};
 
-makeCalculations.result= (req, res) =>
+makeCalculations.result = (req, res) =>
 {  
-    if(req.body.hasOwnProperty("language")&&req.body.hasOwnProperty("mimetype")&&req.body.hasOwnProperty("count")){
-        let countCost;
-        let result;
-        let add;
-        const{count,mimetype,language}=req.body;
+        const{language,count,mimetype}=req.body;
         multiplication(language,count)
         {
             if(language==="en")
@@ -32,10 +27,6 @@ makeCalculations.result= (req, res) =>
                         countCost = count*0.12;
                         result = count/333;
                     }
-                    else
-                    {
-
-                    }
                 }
                
             }
@@ -51,7 +42,7 @@ makeCalculations.result= (req, res) =>
                     }
                     if(mimetype=="docx"||mimetype=="doc"||mimetype=="rtf"||mimetype=="pdf")
                     {
-                        countCost = count*9;
+                        countCost = count*0.05;
                         result = count/1333;
                     }
                 }
@@ -68,7 +59,7 @@ makeCalculations.result= (req, res) =>
                 });
                 return;
             }
-            if(moment().hour() < 1 ||moment().hour() > 23){
+            if(moment().hour() < 0 ||moment().hour() > 23){
                 res.status(200).send({    
                     message:"Close"  
                 });
@@ -84,7 +75,6 @@ makeCalculations.result= (req, res) =>
                 deadline:result= Date.now()     
             });
             return;  
-        }  
-    }
+        }   
 }
 module.exports  = makeCalculations;
