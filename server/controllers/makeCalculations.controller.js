@@ -79,15 +79,7 @@ function close(){
     
 };
 
-function results(){
-    res.status(200).send({    
-        price:(Math.ceil(countCost)),
-        time: (h)+" ч. "+(m)+" мин. ",
-        deadline_date: moment().format(`MMMM ${moment().date()} , ${moment().hour()+h}:${moment().minute()+m}:ss`),
-        deadline:result= Date.now(), 
-    });
-    return;  
-};
+function results(){};
 
 makeCalculations.result = (req, res) =>
 {  
