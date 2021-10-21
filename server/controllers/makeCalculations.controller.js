@@ -1,32 +1,116 @@
 const { request } = require("express");
 var moment = require('moment');
 
-const makeCalculations = function(){};
-const multiplication = function(){};
-const weekend = function(){};
-const results = function(){};
-const extension = function(){};
+const makeCalculations = function(){
+
+};
+function multiplication(count){
+    
+}
+function priceOfEnglish(count){
+    countCost = count*0.12;
+    result = count/0.095;
+    h = result/3600 ^ 0 ;
+    m = (result-h*3600)/60 ^ 0 ;
+    s = result-h*3600-m*60 ; 
+    return;
+}
+
+function englishDiscountedprice(count){
+    add = (count*0.12)/5;
+    countCost = (count*0.12)+add;
+    result = count/0.095;
+    h = result/3600 ^ 0 ;
+    m = (result-h*3600)/60 ^ 0
+    s = result-h*3600-m*60
+    return;
+}
+
+function russianDiscountedprice(count){
+    add = (count*0.12)/5;
+    countCost = (count*0.12)+add;
+    result = count/0.095;
+    h = result/3600 ^ 0 ;
+    m = (result-h*3600)/60 ^ 0
+    s = result-h*3600-m*60
+    return;
+}
+
+function priceOfRussian(count){
+    countCost = count*0.05;
+    result = count/0.37027777777;
+    h = result/3600 ^ 0 ;
+    m = (result-h*3600)/60 ^ 0 ;
+    s = result-h*3600-m*60 ;
+    return;
+}
+
+function extension(mimetype){
+
+
+
+};
+
+function weekend(){
+    if(moment().weekday() == 6){
+        res.status(200).send({    
+            message:moment().date()+2,
+            price:(Math.ceil(countCost)),
+            time: (Math.ceil(result)),
+            deadline_date: moment().format(`MMMM ${moment().date()+2} , ${moment().hour()+h}:${moment().minute()+m}:ss`),
+            deadline:result= Date.now(),
+            Times:(h)+" ч. "+(m)+" мин. " 
+        });
+        return;
+    }
+    if(moment().weekday() == 7){
+        res.status(200).send({    
+            price:(Math.ceil(countCost)),
+            time: (Math.ceil(result)),
+            deadline_date: moment().format(`MMMM ${moment().date()+1} , ${moment().hour()+h}:${moment().minute()+m}:ss`),
+            deadline:result= Date.now(),
+            Times:(h)+" ч. "+(m)+" мин. " 
+        });
+        return;
+    }
+};
+
+function close(){
+    
+};
+
+function results(){
+    res.status(200).send({    
+        price:(Math.ceil(countCost)),
+        time: (h)+" ч. "+(m)+" мин. ",
+        deadline_date: moment().format(`MMMM ${moment().date()} , ${moment().hour()+h}:${moment().minute()+m}:ss`),
+        deadline:result= Date.now(), 
+    });
+    return;  
+};
 
 makeCalculations.result = (req, res) =>
 {  
         const{language,count,mimetype}=req.body;
+        const startOfday = 10;
+        const endOfday = 19;
         multiplication(language,count)
         {
             if(language==="en")
             {
-                extension(mimetype)
+                extension(mimetype);
                 {
                     if(mimetype=="none")
                     {
-                        add = (count*0.12)/5;
-                        countCost = (count*0.12)+add;
-                        result = count/333;
+                        englishDiscountedprice(count);
+
+
                     }
                     if(mimetype=="docx"||mimetype=="doc"||mimetype=="rtf"||mimetype=="pdf")
                     {
-                        countCost = count*0.12;
-                        result = count/333;
+                        priceOfEnglish(count); 
                     }
+                    
                 }
                
             }
@@ -36,14 +120,11 @@ makeCalculations.result = (req, res) =>
                 {
                     if(mimetype=="none")
                     {
-                        add = (count*0.05)/5;
-                        countCost = (count*0.05)+add;
-                        result = count/333;
+                        russianDiscountedprice(count);
                     }
                     if(mimetype=="docx"||mimetype=="doc"||mimetype=="rtf"||mimetype=="pdf")
                     {
-                        countCost = count*0.05;
-                        result = count/1333;
+                        priceOfRussian(count)
                     }
                 }
                
@@ -51,28 +132,28 @@ makeCalculations.result = (req, res) =>
 
         
         }
-        weekend()
+        weekend();    
+        close() 
         {
-            if(moment().weekday() == 6||moment().weekday() == 7){
+            if(moment().hour() > endOfday){
+                
                 res.status(200).send({    
-                    message:"Weekend"  
+                    price:(Math.ceil(countCost)),
+                    time: (Math.ceil(result)),
+                    deadline:result= Date.now(),
+                    deadline_date:moment().format(`MMMM ${moment().date()+1}  ${(startOfday + h)+" ч. "+(m)+" мин. "}`)
                 });
                 return;
-            }
-            if(moment().hour() < 0 ||moment().hour() > 23){
-                res.status(200).send({    
-                    message:"Close"  
-                });
-                return;
-            }
+        }
+
         }
         results()
         {
             res.status(200).send({    
-                price:countCost,
-                time:result,
-                deadline_date: moment().format(`MMMM Do YYYY, ${moment().hour()+result}:mm:ss`),
-                deadline:result= Date.now()     
+                price:(Math.ceil(countCost)),
+                time: (h)+" ч. "+(m)+" мин. ",
+                deadline_date: moment().format(`MMMM ${moment().date()} , ${moment().hour()+h}:${moment().minute()+m}:ss`),
+                deadline:result= Date.now(), 
             });
             return;  
         }   
