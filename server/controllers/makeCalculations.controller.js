@@ -1,7 +1,9 @@
 const { request } = require("express");
 var moment = require('moment');
 
-const makeCalculations = function(){
+
+function makeCalculations(res,req){
+    
 
 };
 function multiplication(count){
@@ -51,35 +53,9 @@ function extension(mimetype){
 
 };
 
-function weekend(){
-    if(moment().weekday() == 6){
-        res.status(200).send({    
-            message:moment().date()+2,
-            price:(Math.ceil(countCost)),
-            time: (Math.ceil(result)),
-            deadline_date: moment().format(`MMMM ${moment().date()+2} , ${moment().hour()+h}:${moment().minute()+m}:ss`),
-            deadline:result= Date.now(),
-            Times:(h)+" ч. "+(m)+" мин. " 
-        });
-        return;
-    }
-    if(moment().weekday() == 7){
-        res.status(200).send({    
-            price:(Math.ceil(countCost)),
-            time: (Math.ceil(result)),
-            deadline_date: moment().format(`MMMM ${moment().date()+1} , ${moment().hour()+h}:${moment().minute()+m}:ss`),
-            deadline:result= Date.now(),
-            Times:(h)+" ч. "+(m)+" мин. " 
-        });
-        return;
-    }
-};
-
-function close(){
+function results(){
     
 };
-
-function results(){};
 
 makeCalculations.result = (req, res) =>
 {  
@@ -95,9 +71,8 @@ makeCalculations.result = (req, res) =>
                     if(mimetype=="none")
                     {
                         englishDiscountedprice(count);
-
-
                     }
+
                     if(mimetype=="docx"||mimetype=="doc"||mimetype=="rtf"||mimetype=="pdf")
                     {
                         priceOfEnglish(count); 
@@ -124,8 +99,31 @@ makeCalculations.result = (req, res) =>
 
         
         }
-        weekend();    
-        close() 
+        function weekend()
+        {
+            if(moment().weekday() == 6){
+                res.status(200).send({    
+                    price:(Math.ceil(countCost)),
+                    time: (Math.ceil(result)),
+                    deadline_date:moment().format(`MMMM ${moment().date()+2
+                    }  ${(startOfday + h)+" ч. "+(m)+" мин. "}`),
+                    deadline:result= Date.now(),
+                    Times:(h)+" ч. "+(m)+" мин. " 
+                });
+                return;
+            }
+            if(moment().weekday() == 7){
+                res.status(200).send({    
+                    price:(Math.ceil(countCost)),
+                    time: (Math.ceil(result)),
+                    deadline_date:moment().format(`MMMM ${moment().date()+1}  ${(startOfday + h)+" ч. "+(m)+" мин. "}`),
+                    deadline:result= Date.now(),
+                    Times:(h)+" ч. "+(m)+" мин. " 
+                });
+                return;
+            }
+        };    
+        function close() 
         {
             if(moment().hour() > endOfday){
                 
@@ -136,9 +134,11 @@ makeCalculations.result = (req, res) =>
                     deadline_date:moment().format(`MMMM ${moment().date()+1}  ${(startOfday + h)+" ч. "+(m)+" мин. "}`)
                 });
                 return;
-        }
+                
+            }
 
         }
+
         results()
         {
             res.status(200).send({    
