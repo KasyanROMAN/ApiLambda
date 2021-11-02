@@ -1,5 +1,5 @@
 const { request } = require("express");
-var moment = require('moment');
+let moment = require('moment');
 
 
 function makeCalculations(res,req) {
@@ -52,18 +52,24 @@ function extension(mimetype){
 
 };
 
-function results() {
-
+function results()
+ {
     CorrDate = moment().add(0,'d').add(h,'hours').add(m,'m').add(s,'s').format('DD-MM-YYYY, HH:mm:ss')
-    if(moment.weekdays == 6)
+    if(moment.weekdays==6)
     {
-        CorrDate = moment().add()(2,'d').add(h,'hours').add(m,'m').add(s,'s').format('DD-MM-YYYY, HH:mm:ss')
+        CorrDate = moment().add(2,'d').add(h,'hours').add(m,'m').add(s,'s').format('DD-MM-YYYY, HH:mm:ss')
     }
-    if(moment.weekdays == 7)
+    if(moment.weekdays==7)
     {
         CorrDate = moment().add(1,'d').add(h,'hours').add(m,'m').add(s,'s').format('DD-MM-YYYY, HH:mm:ss')
     }
-
+    if(moment().hour() > 19)
+    {
+        CorrDate = moment().add(1,'d').set('hour', 10+h).set('m',0+m).set('s',s).format('DD-MM-YYYY, HH:mm:ss')
+    }
+    
+    return CorrDate;
+    
 };
 
 makeCalculations.result = (req, res) =>
@@ -94,13 +100,13 @@ makeCalculations.result = (req, res) =>
         
         }    
 
-        results()
+         results()
         {
             res.status(200).send({    
                 price:(Math.ceil(countCost)),
                 time: (h)+" ч. "+(m)+" мин. ",
-                deadline_date:CorrDate,
-                deadline_date:CorrData.unix()
+                dead_line:CorrDate,
+                Unix_timestamp:CorrDate = moment().unix()
 
             });
             return;  
